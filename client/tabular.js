@@ -102,9 +102,9 @@ Template.tabular.rendered = function () {
     // run
     if (tabularTable.name === lastTableName) {
       if (table) {
-        // passing `false` as the second arg tells it to
+        // passing `false` as the second arg tells it not to
         // reset the paging
-        table.ajax.reload(null, true);
+        table.ajax.reload(null, false);
       }
       return;
     }
