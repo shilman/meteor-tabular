@@ -158,21 +158,25 @@ Meteor.publish("tabular_getInfo", function(tableName, selector, sort, skip, limi
   });
   initializing1 = false;
 
+  // MMS: this is really slow for large collections, comment it out
+  //
   // Handle docs being added or removed from the non-limited set.
   // This allows us to get total count available.
-  var initializing2 = true;
-  var handle2 = countCursor.observeChanges({
-    added: function () {
-      if (initializing2) {
-        return;
-      }
-      updateRecords();
-    },
-    removed: function () {
-      updateRecords();
-    }
-  });
-  initializing2 = false;
+  //
+  // var initializing2 = true;
+  // var handle2 = countCursor.observeChanges({
+  //   added: function () {
+  //     if (initializing2) {
+  //       return;
+  //     }
+  //     updateRecords();
+  //   },
+  //   removed: function () {
+  //     updateRecords();
+  //   }
+  // });
+  // initializing2 = false;
+
 
   updateRecords();
   self.ready();
@@ -182,6 +186,6 @@ Meteor.publish("tabular_getInfo", function(tableName, selector, sort, skip, limi
   // care of sending the client any removed messages.
   self.onStop(function () {
     handle1.stop();
-    handle2.stop();
+    //MMS: handle2.stop();
   });
 });
