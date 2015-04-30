@@ -186,11 +186,13 @@ Template.tabular.rendered = function () {
       return;
     }
 
+    fields = _.clone(template.tabular.fields)
+    fields = _.extend(fields, template.tabular.tableDef.extraFields);
     template.tabular.tableDef.sub.subscribe(
       template.tabular.docPub.get(),
       tableName,
       tableInfo.ids || [],
-      template.tabular.fields
+      fields
     );
   });
 
